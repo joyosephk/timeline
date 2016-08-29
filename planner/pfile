@@ -1,0 +1,60 @@
+; Problem file for collaborative kitting
+; Written by Joseph Kim
+; 8/29/2016
+;
+; NOTE: You can update the durations for each activities.
+
+
+(define (problem sample_problem) 
+    (:domain kitting)
+    (:objects 
+        lampA lampB lampC lampD - object
+        con1 con2 - container
+        human robot - agent
+    )
+
+    (:init 
+
+        (available human)
+        (available robot)
+
+        ; AGENT CAPABILITIES - HUMAN
+        (= (retrieve_duration human) 1)
+        (= (assemble_base_duration human) 20)
+        (= (assemble_top_duration human) 20)
+        (= (stock_duration human) 1)
+        (= (get_container_duration human) 2)
+        (= (pad_container_duration human) 4)
+        (= (kitting_duration human) 5)
+
+        ; AGENT CAPABILITIES - ROBOT
+        (= (retrieve_duration robot) 1)
+        (= (assemble_base_duration robot) 9999999)
+        (= (assemble_top_duration robot) 9999999)
+        (= (stock_duration robot) 5)
+        (= (get_container_duration robot) 5)
+        (= (pad_container_duration robot) 9999999)
+        (= (kitting_duration robot) 10)
+
+
+        ;ERGONOMICS ESTIMATES
+        (= (ergonomics human) 0)
+        (= (ergonomics robot) 0)
+
+
+    )
+    
+
+    (:goal (and
+  
+        (kitted lampA con1)
+        (kitted lampB con1)
+        (kitted lampC con2)
+        (kitted lampD con2)
+
+    ))
+    
+  (:metric minimize (+ (* 1 (total-time))  (* 2 (ergonomics human))))
+
+
+)
