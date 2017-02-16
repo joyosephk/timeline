@@ -1,10 +1,10 @@
 ## Instructions on running the planner
 
-lpg-td-1.0 is the planner that we will be using.  For planning, you need a domain file and a corresponding problem file. 
+lpg-td-1.0 is the planner that we will be using.  For planning, you always need a domain file and a corresponding problem file. This is the command that you will use.  
 
 `lpg-td-1.0 -o [domainFILE] -f [problemFILE] -quality` <br />
 
-This will output the solution onto the screen. For example, you can do
+This will output the solution onto the terminal. For example, you can also do
 
 `lpg-td-1.0 -o simple/domain.pddl -f simple/pfile1 -quality -out sol1` <br />
 
