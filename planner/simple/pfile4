@@ -1,0 +1,57 @@
+; Simple Collaborative Kitting PFILE
+; Written by Joseph Kim
+; 2/16/2017
+;
+; NOTE: You can update the times and ergonomics for each activities
+;
+; Changes: varying durations, half the weight for ergonomics
+
+
+(define (problem pfile1) 
+    (:domain simplekit)
+    (:objects 
+        p1 p2 - object
+        human robot - agent
+    )
+
+    (:init 
+        (available human)
+        (available robot)
+
+        ;HUMAN DURATIONS
+        (= (assemble_duration human) 2)
+        (= (inspect_duration human) 1)
+        (= (kit_duration human) 2)
+
+        ;ROBOT DURATIONS
+        (= (assemble_duration robot) 4)
+        (= (inspect_duration robot) 1)
+        (= (kit_duration robot) 4)
+
+        ; ERGONOMICS ESTIMATES
+        (= (assemble_ergo human) 5)
+        (= (inspect_ergo human) 1)
+        (= (kit_ergo human) 2)
+        (= (assemble_ergo robot) 0)
+        (= (inspect_ergo robot) 0)
+        (= (kit_ergo robot) 0)
+        (= (ergonomics) 0)    
+    )
+    
+
+    (:goal (and
+
+        (assembled p1)
+        (inspected p1)
+        (kitted p1)
+
+        (assembled p2)
+        (inspected p2)
+        (kitted p2)
+
+    ))
+    
+  (:metric minimize (+ (* 1 (total-time))  (* 0.5 (ergonomics))))
+
+
+)
