@@ -92,6 +92,7 @@ function drawChart() {
 		
 		
         dataTable.addRows([ 
+            [ agent, action, action_object, new Date(0, 0, 0, 0, start), new Date(0, 0, 0, 0, end)],
         ]);
     }
     
@@ -116,6 +117,7 @@ function drawChart() {
 	
 	// Customizing tooltip
 	var dateFormat = new google.visualization.DateFormat({
+		pattern: 'm:s'
     });
 
     for (var i = 0; i < dataTable.getNumberOfRows(); i++) {

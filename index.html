@@ -40,6 +40,17 @@
         .icon-none {
             opacity: 0;
         }
+		.ggl-tooltip {
+		border: 1px solid #E0E0E0;
+		font-family: Arial, Helvetica;
+		padding: 6px 6px 6px 6px;
+		width: 170px;
+		}
+
+		.ggl-tooltip span {
+		font-weight: bold;
+		}
+
     </style>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -100,25 +111,44 @@
         <button onclick="drawChart()">Refresh Timeline</button>
         <br>
 
-        <textarea id="plannerOutput" rows="20" cols="50"> 0.000: (MoveTo robot t_main table_a) [4.0]
-  0.000: (MoveTo human t_main table_a) [6.667]
-  4.001: (PickUp robot left a2 table_a) [2.0]
-  6.001: (MoveTo robot table_a t_main) [4.0]
-  6.668: (PickUp human left a1 table_a) [1.0]
-  7.668: (MoveTo human table_a t_main) [6.667]
- 10.001: (Assemble robot left a2 t_main) [2.0]
- 12.001: (MoveTo robot t_main table_b) [6.0]
- 14.334: (Assemble human left a1 t_main) [1.0]
- 15.334: (Assemble human t_main table_a) [6.667]
- 18.001: (PickUp robot left b2 table_b) [2.0]
- 20.001: (PutDown robot table_b t_main) [6.0]
- 22.002: (MoveTo human table_a t_main) [6.667]
- 26.001: (Rotate robot left b2 t_main) [2.0]
- 28.001: (MoveTo robot t_main table_b) [6.0]
- 28.670: (PutDown human t_main table_b) [10.0]
- 34.001: (PickUp robot left b1 table_b) [2.0]
- 36.001: (MoveTo robot table_b t_main) [6.0]
- 42.001: (Rotate robot left b1 t_main) [2.0]
+        <textarea id="plannerOutput" rows="20" cols="50"> 0.0003:   (GOTO ROBOT TABLE_MAIN TABLE_A) [4.0000]
+4.0005:   (PICKUP ROBOT A1 TABLE_A) [3.0000]
+7.0008:   (GOTO ROBOT TABLE_A TABLE_INSPECT) [2.0000]
+9.0010:   (PUTDOWN ROBOT A1 TABLE_INSPECT) [3.0000]
+12.0013:   (INSPECT ROBOT A1 TABLE_INSPECT) [5.0000]
+17.0015:   (PICKUP ROBOT A1 TABLE_INSPECT) [3.0000]
+0.0018:   (GOTO HUMAN TABLE_MAIN TABLE_B) [6.0000]
+6.0020:   (PICKUP HUMAN B2 TABLE_B) [1.0000]
+7.0023:   (GOTO HUMAN TABLE_B TABLE_INSPECT) [4.0000]
+11.0025:   (PUTDOWN HUMAN B2 TABLE_INSPECT) [1.0000]
+12.0028:   (INSPECT HUMAN B2 TABLE_INSPECT) [3.0000]
+15.0030:   (PICKUP HUMAN B2 TABLE_INSPECT) [1.0000]
+16.0033:   (GOTO HUMAN TABLE_INSPECT TABLE_MAIN) [3.0000]
+19.0035:   (PUTDOWN HUMAN B2 TABLE_MAIN) [1.0000]
+20.0037:   (KIT HUMAN B2 TABLE_MAIN) [5.0000]
+20.0040:   (GOTO ROBOT TABLE_INSPECT TABLE_MAIN) [3.0000]
+23.0042:   (PUTDOWN ROBOT A1 TABLE_MAIN) [3.0000]
+26.0045:   (KIT HUMAN A1 TABLE_MAIN) [5.0000]
+31.0047:   (GOTO HUMAN TABLE_MAIN TABLE_A) [4.0000]
+35.0050:   (PICKUP HUMAN A2 TABLE_A) [1.0000]
+36.0052:   (GOTO HUMAN TABLE_A TABLE_INSPECT) [2.0000]
+38.0055:   (PUTDOWN HUMAN A2 TABLE_INSPECT) [1.0000]
+39.0057:   (GOTO HUMAN TABLE_INSPECT TABLE_B) [4.0000]
+43.0060:   (PICKUP HUMAN B1 TABLE_B) [1.0000]
+44.0062:   (GOTO HUMAN TABLE_B TABLE_MAIN) [6.0000]
+50.0065:   (GOTO HUMAN TABLE_MAIN TABLE_INSPECT) [3.0000]
+53.0067:   (PUTDOWN HUMAN B1 TABLE_INSPECT) [1.0000]
+54.0070:   (INSPECT HUMAN B1 TABLE_INSPECT) [3.0000]
+57.0073:   (PICKUP HUMAN B1 TABLE_INSPECT) [1.0000]
+26.0075:   (GOTO ROBOT TABLE_MAIN TABLE_INSPECT) [3.0000]
+39.0078:   (INSPECT ROBOT A2 TABLE_INSPECT) [5.0000]
+44.0080:   (PICKUP ROBOT A2 TABLE_INSPECT) [3.0000]
+47.0083:   (GOTO ROBOT TABLE_INSPECT TABLE_MAIN) [3.0000]
+50.0085:   (PUTDOWN ROBOT A2 TABLE_MAIN) [3.0000]
+53.0088:   (KIT ROBOT A2 TABLE_MAIN) [10.0000]
+58.0090:   (GOTO HUMAN TABLE_INSPECT TABLE_MAIN) [3.0000]
+61.0093:   (PUTDOWN HUMAN B1 TABLE_MAIN) [1.0000]
+63.0095:   (KIT ROBOT B1 TABLE_MAIN) [10.0000]
         </textarea>
     
 
