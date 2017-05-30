@@ -6,9 +6,8 @@ lpg-td-1.0 is the planner that we will be using.  For planning, you always need 
 
 This will output the solution onto the terminal. For example, you can also do
 
-`lpg-td-1.0 -o simple/domain.pddl -f simple/pfile1 -quality -out sol1` <br />
 
 which prints out the plan to the file 'sol1.SOL'. 
 
 
-#### Note that sometimes, you may have to execute the planner multiple times for it to properly display the plan on the terminal.  
+#### Note that at times, you may have to execute the planner multiple times for it to properly display the plan on the terminal.  

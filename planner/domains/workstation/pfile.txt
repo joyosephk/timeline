@@ -1,0 +1,86 @@
+; Human-robot workstation kitting
+; -PDDL Problem file
+; -Written by Joseph Kim
+
+
+(define (problem pfile1) 
+(:domain workstation)
+(:objects 
+    table_main table_a table_b table_inspect - location
+    a1 a2 b1 b2 - block
+    human robot - agent
+)
+
+(:init 
+
+    ; INITIAL LOCATIONS
+
+    (at human table_main)
+    (at robot table_main)
+    (on a1 table_a)
+    (on a2 table_a)
+    (on b1 table_b)
+    (on b2 table_b)
+    (available human)
+    (available robot)
+    (grasp_free human)
+    (grasp_free robot)
+
+
+    ; AGENT CAPABILITIES
+
+    (= (speed human) 5)
+    (= (time_grasp human) 1)
+    (= (time_inspect human) 3)
+    (= (time_kit human) 5)
+
+
+    (= (speed robot) 5)
+    (= (time_grasp robot) 3)
+    (= (time_inspect robot) 5)
+    (= (time_kit robot) 10)
+
+
+    ; LOCATION DISTANCES
+
+    (= (distance table_main table_a) 20)
+    (= (distance table_a table_main) 20)
+    
+    (= (distance table_main table_b) 30)
+    (= (distance table_b table_main) 30)
+
+    (= (distance table_main table_inspect) 15)
+    (= (distance table_inspect table_main) 15)
+
+    (= (distance table_inspect table_a) 10)
+    (= (distance table_a table_inspect) 10)
+
+    (= (distance table_inspect table_b) 20)
+    (= (distance table_b table_inspect) 20)
+
+    (= (distance table_a table_b) 15)
+    (= (distance table_b table_a) 15)
+
+
+    ; POSSIBLE INSPECT AND KIT LOCATIONS
+    (inspectLocation table_inspect)
+    (kitLocation table_main)
+
+
+    ; ERGONOMICS ESTIMATES
+    (= (ergonomics human) 0)
+    (= (ergonomics robot) 0)
+
+)
+
+
+(:goal (and
+    (kitted a1)
+    (kitted a2)
+    (kitted b1)
+    (kitted b2)
+    )
+)
+
+(:metric minimize (+ (* 1 (total-time))  (* 2 (ergonomics human))))
+)

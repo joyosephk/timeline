@@ -70,23 +70,28 @@ function drawChart() {
     dataTable.addColumn({ type: 'string', id: 'Name' });
     dataTable.addColumn({ type: 'date', id: 'Start' });
     dataTable.addColumn({ type: 'date', id: 'End' });
+	dataTable.insertColumn(2, {type: 'string', role: 'tooltip', p: {html: true}});
 
     // For each line in the planner, break it down to the relevant parts
     // and add it in the correct format to the datatable for the timeline
     function plannerLineToDict(plannerLine) {
-        var start = parseFloat(plannerLine.split(":")[0]);
-        var action = plannerLine.split("(")[1].split(" ")[0];
-        var agent = plannerLine.split("(")[1].split(" ")[1];
-        var object = plannerLine.split("(")[1].split(" ")[2];
-		var action_object = action + " - " + object;
+        
+		var start = parseFloat(plannerLine.split(":")[0]);
         var duration = parseFloat(plannerLine.split("[")[1].split("]")[0]);
         var end = start + duration;
+	
+		// Using regular expression
+		var patt = /\(([\w\s\_]+)\)/
+		var action_string = patt.exec(plannerLine)[1];
+		var items = action_string.split(" ");
+		var action = items[0].toLowerCase();
+		var agent = items[1].toLowerCase();
+		var objects = items.slice(2).join(", ");
+		var action_object = action + " (" + objects + ")";
 		actions.push(action);
 		
-        //console.log("start " + start + ", action " + action_object + ", agent " + agent + ", dur " + duration + ", end " + end);
 		
         dataTable.addRows([ 
-            [ agent, action, new Date(2015, 3, 30, 0, start), new Date(2015, 3, 30, 0, end)],
         ]);
     }
     
@@ -97,15 +102,36 @@ function drawChart() {
     for (var i=0;i<plannerOutput.length-1;i++){
         plannerLineToDict(plannerOutput[i]);
     }
+	
+	//Controlling colors manually
+	// var a = actions;
+	// a.forEach(function(item, i) { if (item == "moveto") a[i] = '#cbb69d'; });
+	// a.forEach(function(item, i) { if (item == "pickup") a[i] = '#ffffff'; });
+	// a.forEach(function(item, i) { if (item == "putdown") a[i] = '#ffffff'; });
+	// a.forEach(function(item, i) { if (item == "assemble") a[i] = '#ffffff'; });
+	// a.forEach(function(item, i) { if (item == "rotate") a[i] = '#ffffff'; });
+	// console.log(a)
+	// var options = {colors: a, width:1000};
 
-	//var a = actions;
-	//a.forEach(function(item, i) { if (item == "goto") a[i] = '#cc0000'; });
-	//a.forEach(function(item, i) { if (item == "pickup") a[i] = '#0066ff'; });
-	//a.forEach(function(item, i) { if (item == "putdown") a[i] = '#009933'; });
-	//var options = {colors: a};
+	
+	// Customizing tooltip
+	var dateFormat = new google.visualization.DateFormat({
+    });
+
+    for (var i = 0; i < dataTable.getNumberOfRows(); i++) {
+      var tooltip = '<div class="ggl-tooltip"><span>' +
+        dataTable.getValue(i, 2) + '</span></div><div class="ggl-tooltip"><span>' +
+        'duration:' + '</span>: ' +
+        dateFormat.formatValue(dataTable.getValue(i, 3)) + ' - ' +
+        dateFormat.formatValue(dataTable.getValue(i, 4)) + '</div>';
+
+      dataTable.setValue(i, 2, tooltip);
+    }
+	
   
     // Draw the timeline!
-    chart.draw(dataTable);
+	var options = {tooltip: {isHtml: true}};
+    chart.draw(dataTable, options);
 }
 
 
